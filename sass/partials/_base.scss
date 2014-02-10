@@ -1,0 +1,219 @@
+/* 
+  * Pebble V1.0
+  * Copyright 2014, Ed Chao
+  * Free to use under MIT license.
+  * http://www.opensource.org/licenses/mit-license.php
+  * Feb 2, 2014
+*/
+
+
+@import "../modules/normalize";
+
+
+/* Font Variables
+  ========================================================================== */ 
+  $f-main: "adelle", "Georgia", serif;
+  $f-sub: "source-sans-pro", Helvetica, Arial, sans-serif;
+  $f-size: 1.1rem;
+  $l-height: 2;
+
+
+/* Margin + Padding + Unit Variables
+  ========================================================================== */ 
+$pad: 10px;
+$std: 4px; 
+
+
+/* Color Variables
+  ========================================================================== */ 
+
+  $color-accent: #3498db;
+  $color-accent-a: #2980b9;
+  $color-accent-h: #35abfa;
+  $color-accent-reverse: #fff;
+  $color-accent-reverse-d: #fff; 
+  $color-bg: #ecf0f1;
+  $color-link: #3498db;
+  $color-link-a: #2980b9;
+  $color-link-h: #35abfa;
+
+
+/* Mixins
+  ========================================================================== */ 
+  @mixin border-radius($radius) {
+    -webkit-border-radius: $radius;
+       -moz-border-radius: $radius;
+        -ms-border-radius: $radius;
+         -o-border-radius: $radius;
+            border-radius: $radius;
+  }
+
+  @mixin transition($params...) {
+    -webkit-transition: $params;
+       -moz-transition: $params;
+            transition: $params;  
+  }
+
+  @mixin box-sizing($type){
+    -webkit-box-sizing: $type; /* Safari/Chrome, other WebKit */
+    -moz-box-sizing: $type;    /* Firefox, other Gecko */
+    box-sizing: $type;         /* Opera/IE 8+ */
+  }
+
+  @mixin box-shadow($sh-top, $sh-left, $sh-blur, $sh-color, $inset:"" ){
+    -webkit-box-shadow:$sh-top $sh-left $sh-blur $sh-color #{$inset};
+    -moz-box-shadow:$sh-top $sh-left $sh-blur $sh-color #{$inset};
+    box-shadow:$sh-top $sh-left $sh-blur $sh-color #{$inset};
+  }
+
+/* Basic Styles
+  ========================================================================== */ 
+  body {
+    background: #f9f9f9;
+    font: 100% $f-main;
+    font-size: $f-size;
+    line-height: $l-height;
+    color: #333;
+    -webkit-font-smoothing: antialiased; //Fix for OSX webkit font render bug
+    -webkit-text-size-adjust: 100%;
+  }
+
+
+/* Typography
+  ========================================================================== */ 
+  h1, h2, h3, h4, h5, h6 {
+    color: #111;
+    font: 100% $f-sub;
+    font-weight: bold;
+    line-height: $l-height * 0.6;
+  }
+
+  h1      { font-size: $f-size * 2.8; margin-bottom: $pad * 3; }
+  h2      { font-size: $f-size * 2.5; margin-bottom: $pad * 2.50;}
+  h3      { font-size: $f-size * 2.2; margin-bottom: $pad * 2.25; }
+  h4      { font-size: $f-size * 1.9; margin-bottom: $pad * 2; }
+  h5      { font-size: $f-size * 1.6; margin-bottom: $pad * 1.75; }
+  h6      { font-size: $f-size * 1.3; margin-bottom: $pad * 1.5; }
+
+  p       { margin: 0 0 $pad * 3 0; }
+  em      { font-style: italic; }
+  strong  { font-weight: bold; }
+  hr      { border: solid #ddd; border-width: 1px 0 0; clear: both; margin: $pad 0 $pad * 3; height: 0; }
+  blockquote { font-size: $f-size * 1.5; font-style: italic; line-height: $l-height * 0.8; }
+
+
+/* Links
+  ========================================================================== */ 
+  a { 
+    color: $color-link;
+    text-decoration: none;
+    outline: 0; 
+
+    &:hover{
+      color: $color-link-h;
+      text-decoration: underline;
+    }
+    &:active{
+      color: $color-link-a;
+    }
+  }
+
+
+/* Buttons
+  ========================================================================== */ 
+  button, .button,
+  input[type="submit"],
+  input[type="reset"],
+  input[type="button"] {
+    -webkit-font-smoothing: antialiased; //Fix for OSX webkit font render bug
+    @include box-sizing(border-box);
+    @include border-radius($std);
+    max-width: 100%;
+    font-weight: normal;
+    display: inline-block; //for div buttons
+    background: $color-accent;
+    border: 1px solid $color-accent;
+    outline: none;
+    text-shadow: none;
+    color: $color-accent-reverse;
+    font: 100% $f-sub;
+    text-decoration: none;
+    padding: $pad $pad * 2;
+    cursor: pointer;
+
+    &:hover {
+      background: $color-accent-h;
+      border: 1px solid $color-accent-h;
+
+    }
+
+    &:active {
+      background: $color-link-a;
+    }
+  }
+
+  .overflow-ellipsis {
+    display:block;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
+
+  /* Fix for odd Mozilla border & padding issues - by Dave Gamache */
+  button::-moz-focus-inner,
+  input::-moz-focus-inner {
+    border: 0;
+    padding: 0;
+  }
+
+
+
+/* Forms
+  ========================================================================== */ 
+  form, fieldset {
+    margin-bottom: $pad;
+    input[type="text"],
+    input[type="textarea"],
+    input[type="password"],
+    input[type="email"],
+    textarea,
+    select {
+      -webkit-font-smoothing: antialiased; //Fix for OSX webkit font render bug
+      @include border-radius ($std);
+      @include box-sizing(border-box);
+      margin-bottom: $pad * 2;
+      max-width: 100%;
+      border: 1px solid #ccc;
+      padding: $pad;
+      font: 100% $f-sub;
+      &:focus{
+        outline: none;
+        border: 1px solid $color-accent;
+        color: #444;
+        @include box-shadow(0, 0, $std, rgba(0,0,0,.2));
+      }
+    }
+  }
+
+  label, legend {
+    margin-right: $pad;
+  }
+
+  input[type="checkbox"]{
+    background: #fff;
+    cursor: pointer;
+  }
+
+
+/* Flex  (If you are feeling edgy)
+  ========================================================================== */ 
+  .flex {
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+  }
+
+  .full-area{
+    display:flex;
+    flex:1;
+  }
